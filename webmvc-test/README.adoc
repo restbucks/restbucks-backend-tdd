@@ -37,3 +37,19 @@ Understand @WebMvcTest. +
 7) Assert `_embedded.catalogs` has two items. +
 8) Assert `_embedded.catalogs[].price` is present. +
 9) Assert `_links.self` is present. +
+
+.Step 3
+
+Understand API Contract. +
+
+1) Why doc? +
+2) Why not `Swagger`? +
+3) Understand `MockMvcRestDocumentation.document()` +
+4) Understand `PayloadDocumentation.responseFields()` +
+5) Doc `status`
+6) Understand `HypermediaDocumentation.halLinks()` +
+7) Understand generated snippets +
+8) Understand `RequestDocumentation`, what about find orders by status +
+9) Understand `ResponseFieldsSnippet.andWithPrefix()` +
+10) Why `Spring REST Docs`? +
+

@@ -19,6 +19,8 @@ public class Order {
 
     private Location location;
 
+    private Status status;
+
     private Order(Identity id) {
         this.id = id;
     }
@@ -43,5 +45,36 @@ public class Order {
         public static Identity next() {
             return of(UUID.randomUUID().toString());
         }
+    }
+
+    /**
+     * Enumeration for all the statuses an {@link Order} can be in.
+     */
+    public enum Status {
+
+        /**
+         * Placed, but not payed yet. Still changeable.
+         */
+        PAYMENT_EXPECTED,
+
+        /**
+         * {@link Order} was payed. No changes allowed to it anymore.
+         */
+        PAID,
+
+        /**
+         * The {@link Order} is currently processed.
+         */
+        PREPARING,
+
+        /**
+         * The {@link Order} is ready to be picked up by the customer.
+         */
+        READY,
+
+        /**
+         * The {@link Order} was completed.
+         */
+        TAKEN;
     }
 }

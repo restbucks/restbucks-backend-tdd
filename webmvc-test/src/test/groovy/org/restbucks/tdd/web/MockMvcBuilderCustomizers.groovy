@@ -8,7 +8,7 @@ import org.springframework.test.web.servlet.setup.ConfigurableMockMvcBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log
 
 @Configuration
-class MockMvcBuilderCustomerizers {
+class MockMvcBuilderCustomizers {
 
     @Bean
     protected MockMvcBuilderCustomizer alwaysDoLog() {

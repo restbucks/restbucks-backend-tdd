@@ -1,0 +1,3 @@
+rootProject.name = 'restbucks-backend-tdd'
+
+include 'webmvc-test'

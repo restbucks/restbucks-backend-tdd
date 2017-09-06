@@ -1,0 +1,7 @@
+server:
+  port: 15001
+
+logging:
+  level:
+    org:
+      restbucks: debug

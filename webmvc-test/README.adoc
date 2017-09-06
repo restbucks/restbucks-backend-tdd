@@ -36,3 +36,4 @@ Understand @WebMvcTest. +
 6) Understand `MockMvcBuilderCustomizer`.  +
 7) Assert `_embedded.catalogs` has two items. +
 8) Assert `_embedded.catalogs[].price` is present. +
+9) Assert `_links.self` is present. +

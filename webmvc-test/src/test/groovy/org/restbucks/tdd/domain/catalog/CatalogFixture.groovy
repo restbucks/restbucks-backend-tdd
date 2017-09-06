@@ -4,7 +4,7 @@ class CatalogFixture {
     def target = new Catalog()
 
     CatalogFixture() {
-        target.setId(UUID.randomUUID().toString())
+        target.setId(Catalog.Identity.next())
         target.setName("Latte")
         target.setSize(Size.MEDIUM)
     }

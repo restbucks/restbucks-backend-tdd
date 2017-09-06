@@ -1,0 +1,38 @@
+.Step 1
+
+Understand the system under test a.k.a SUT. +
+
+----
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+' SUT:                                                  '
+'                                                       '
+' +-------------------+  converter   +----------------+ '  send cmd   +----------------+
+' | ResourceAssembler | <----------- | RestController | ' ----------> | CommandHandler |
+' +-------------------+              +----------------+ '             +----------------+
+'                                                       '
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+                                       |
+                                       | query
+                                       v
+                                     +----------------+
+                                     |   Repository   |
+                                     +----------------+
+----
+
+1) Why mock `Repository` and `CommandHandler`? +
+2) Why not mock `ResourceAssembler`? +
+3) Why not test with `CatalogRestController.all()`? +
+4) Why slice test with `@WebMvcTest`? +
+
+.Step 2
+
+Understand @WebMvcTest. +
+
+1) Understand `MockMvc` +
+2) Understand `MockMvcRequestBuilders.get()`. How to issue a `POST` request? +
+3) Understand `andExpect()` and `MockMvcResultMatchers.get()`.  +
+4) Understand `andExpect()` and `MockMvcResultMatchers.jsonPath()`.  +
+5) Understand `andDo()` and `MockMvcResultHandlers.log()`.  +
+6) Understand `MockMvcBuilderCustomizer`.  +
+7) Assert `_embedded.catalogs` has two items. +
+8) Assert `_embedded.catalogs[].price` is present. +

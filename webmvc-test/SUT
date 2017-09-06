@@ -1,0 +1,6 @@
+( SUT:
+[RestController] -> { label: "converter"; } [ResourceAssembler]
+)
+[RestController] -> { label: "query"; } [Repository]
+[RestController] -> { label: "send cmd"; } [CommandHandler]
+

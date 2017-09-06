@@ -1,0 +1,15 @@
+.URI:
+You should not hard code the URI to find the order by id, you should extract it from hal links.
+
+.Request Sample:
+include::{snippets}/ordering/find_order_by_id/http-request.adoc[]
+
+.Response Sample:
+include::{snippets}/ordering/find_order_by_id/http-response.adoc[]
+
+.Response Fields:
+include::{snippets}/ordering/find_order_by_id/response-fields.adoc[]
+
+.Hal Links:
+include::{snippets}/ordering/find_order_by_id/links.adoc[]
+

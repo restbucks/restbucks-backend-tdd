@@ -1,5 +1,8 @@
 package org.restbucks.tdd.web.rest.assembler;
 
+import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+
 import org.modelmapper.ModelMapper;
 import org.restbucks.tdd.domain.ordering.Order;
 import org.restbucks.tdd.web.rest.OrderRestController;
@@ -19,6 +22,9 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
 
     @Override
     public OrderResource toResource(Order entity) {
-        return modelMapper.map(entity, OrderResource.class);
+        OrderResource resource = modelMapper.map(entity, OrderResource.class);
+        resource.add(linkTo(methodOn(OrderRestController.class).findOne(entity.getId().getValue()))
+            .withSelfRel());
+        return resource;
     }
 }

@@ -2,7 +2,6 @@ package org.restbucks.tdd.web.rest;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.restbucks.tdd.domain.catalog.CatalogRepository;
 import org.restbucks.tdd.web.rest.assembler.CatalogResourceAssembler;
@@ -22,7 +21,6 @@ public class CatalogRestController {
     @NonNull
     private final CatalogResourceAssembler catalogResourceAssembler;
 
-    @SneakyThrows
     @GetMapping("/rel/catalogs")
     public Resources<CatalogResource> all() {
         return catalogResourceAssembler.toHalResources(catalogRepository.findAll());

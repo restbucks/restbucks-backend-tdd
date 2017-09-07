@@ -1,3 +1,4 @@
 == Ordering
+link:ordering/place_order.html[Place order] +
 link:ordering/find_order_by_id.html[Find order by id] +
 

@@ -3,12 +3,16 @@ package org.restbucks.tdd.web.rest;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.restbucks.tdd.application.PlaceOrderCommandHandler;
+import org.restbucks.tdd.command.PlaceOrderCommand;
 import org.restbucks.tdd.domain.ordering.Order;
 import org.restbucks.tdd.domain.ordering.OrderRepository;
 import org.restbucks.tdd.web.rest.assembler.OrderResourceAssembler;
 import org.restbucks.tdd.web.rest.resource.OrderResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -20,6 +24,9 @@ public class OrderRestController {
     private final OrderRepository orderRepository;
 
     @NonNull
+    private final PlaceOrderCommandHandler placeOrderCommandHandler;
+
+    @NonNull
     private final OrderResourceAssembler orderResourceAssembler;
 
     @GetMapping("/rel/orders/{id}")
@@ -27,4 +34,8 @@ public class OrderRestController {
         return orderResourceAssembler.toResource(orderRepository.findOne(Order.Identity.of(id)));
     }
 
+    @PostMapping("/rel/orders/placeOrderCommand")
+    public OrderResource handle(@RequestBody PlaceOrderCommand command) {
+        return orderResourceAssembler.toResource(placeOrderCommandHandler.handle(command));
+    }
 }

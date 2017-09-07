@@ -1,0 +1,18 @@
+.URI:
+You can place an order with `POST` `rels/orders/placeOrderCommand`.
+
+.Request Sample:
+include::{snippets}/ordering/place_order/http-request.adoc[]
+
+.Request Fields:
+include::{snippets}/ordering/place_order/request-fields.adoc[]
+
+.Response Sample:
+include::{snippets}/ordering/place_order/http-response.adoc[]
+
+.Response Fields:
+include::{snippets}/ordering/place_order/response-fields.adoc[]
+
+.Hal Links:
+include::{snippets}/ordering/place_order/links.adoc[]
+

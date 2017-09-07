@@ -2,6 +2,8 @@ package org.restbucks.tdd.domain.ordering;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +23,8 @@ public class Order {
 
     private Status status;
 
+    private List<OrderLine> orderLines = new ArrayList<>();
+
     private Order(Identity id) {
         this.id = id;
     }
@@ -29,8 +33,17 @@ public class Order {
         this.location = location;
     }
 
+    public void with(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
+
     public static Order newOrder() {
         return new Order(Identity.next());
+    }
+
+
+    public int totalAmount() {
+        return orderLines.stream().mapToInt(OrderLine::subtotalAmount).sum();
     }
 
     @Value

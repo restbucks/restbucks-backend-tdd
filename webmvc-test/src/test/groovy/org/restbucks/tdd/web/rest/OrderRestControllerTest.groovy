@@ -4,7 +4,9 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import org.junit.Test
 import org.restbucks.tdd.application.PlaceOrderCommandHandler
 import org.restbucks.tdd.command.PlaceOrderCommand
+import org.restbucks.tdd.domain.catalog.Size
 import org.restbucks.tdd.domain.ordering.Location
+import org.restbucks.tdd.domain.ordering.OrderLine
 import org.restbucks.tdd.domain.ordering.OrderRepository
 import org.restbucks.tdd.web.AbstractWebMvcTest
 import org.restbucks.tdd.web.rest.assembler.OrderResourceAssembler
@@ -43,6 +45,10 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
 
         def order = newOrder()
         order.with(TAKE_AWAY)
+        order.with([
+            new OrderLine("Latte", Size.MEDIUM, 1, 28),
+            new OrderLine("Cappuccino", Size.LARGE, 1, 32)
+        ])
 
         given(orderRepository.findOne(order.id)).willReturn(order)
 
@@ -57,6 +63,16 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
                                 fieldWithPath("location")
                                     .description("The location of the order, should be one of ${Location.values()}"),
                                 subsectionWithPath("_links").ignored()//validate by links() block
+                            )
+                            .andWithPrefix("orderLines[].",
+                                fieldWithPath("item")
+                                    .description("The item of the order line"),
+                                fieldWithPath("size")
+                                    .description("The size of the order line, should be one of ${Size.values()}"),
+                                fieldWithPath("quantity")
+                                    .description("The quantity of the order line"),
+                                fieldWithPath("price")
+                                    .description("The price of the order line")
                             ),
                             links(halLinks(),
                                     linkWithRel("self")
@@ -71,8 +87,15 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
 
         def order = newOrder()
         order.with(TAKE_AWAY)
+        order.with([
+            new OrderLine("Latte", Size.MEDIUM, 1, 28),
+            new OrderLine("Cappuccino", Size.LARGE, 1, 32)
+        ])
 
-        def command = new PlaceOrderCommand(order.location)
+        def command = new PlaceOrderCommand(order.location, [
+            new PlaceOrderCommand.Item("Latte", Size.MEDIUM, 1, 28),
+            new PlaceOrderCommand.Item("Cappuccino", Size.LARGE, 1, 32)
+        ])
 
         given(placeOrderCommandHandler.handle(command)).willReturn(order)
 
@@ -80,7 +103,18 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
         this.mockMvc.perform(post("/rel/orders/placeOrderCommand")
                                 .content("""
                                     {
-                                        "location": "TAKE_AWAY"
+                                        "location": "TAKE_AWAY",
+                                        "items": [{
+                                            "item": "Latte",
+                                            "size": "MEDIUM",
+                                            "quantity": 1,
+                                            "price": 28
+                                        },{
+                                            "item": "Cappuccino",
+                                            "size": "LARGE",
+                                            "quantity": 1,
+                                            "price": 32
+                                        }]
                                     }
                                 """)
                                 .contentType(APPLICATION_JSON_UTF8))
@@ -92,11 +126,31 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
                             requestFields(
                                 fieldWithPath("location")
                                     .description("The location of the order, should be one of ${Location.values()}")
+                            )
+                            .andWithPrefix("items[].",
+                                fieldWithPath("item")
+                                    .description("The item"),
+                                fieldWithPath("size")
+                                    .description("The size of the item, should be one of ${Size.values()}"),
+                                fieldWithPath("quantity")
+                                    .description("The quantity of the item"),
+                                fieldWithPath("price")
+                                    .description("The price of the item")
                             ),
                             responseFields(
                                 fieldWithPath("location")
                                     .description("The location of the order, should be one of ${Location.values()}"),
                                 subsectionWithPath("_links").ignored()//validate by links() block
+                            )
+                            .andWithPrefix("orderLines[].",
+                                fieldWithPath("item")
+                                    .description("The item of the order line"),
+                                fieldWithPath("size")
+                                    .description("The size of the order line, should be one of ${Size.values()}"),
+                                fieldWithPath("quantity")
+                                    .description("The quantity of the order line"),
+                                fieldWithPath("price")
+                                    .description("The price of the order line")
                             ),
                             links(halLinks(),
                                     linkWithRel("self")

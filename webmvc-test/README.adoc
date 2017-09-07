@@ -53,3 +53,12 @@ Understand API Contract. +
 9) Understand `ResponseFieldsSnippet.andWithPrefix()` +
 10) Why `Spring REST Docs`? +
 
+.Step 4
+
+Understand API stubbing. +
+
+1) Understand `spring-cloud-contract-wiremock`? +
+2) Understand `WireMockRestDocs.verify()` +
+3) Understand `withHeader()`/`withBody()` +
+4) Why stubbing? +
+5) How to publish stubs? + 

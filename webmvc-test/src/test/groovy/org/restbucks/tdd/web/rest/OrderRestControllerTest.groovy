@@ -62,6 +62,8 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
                             responseFields(
                                 fieldWithPath("location")
                                     .description("The location of the order, should be one of ${Location.values()}"),
+                                fieldWithPath("totalAmount")
+                                    .description("The total amount of the order"),
                                 subsectionWithPath("_links").ignored()//validate by links() block
                             )
                             .andWithPrefix("orderLines[].",
@@ -140,6 +142,8 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
                             responseFields(
                                 fieldWithPath("location")
                                     .description("The location of the order, should be one of ${Location.values()}"),
+                                fieldWithPath("totalAmount")
+                                    .description("The total amount of the order"),
                                 subsectionWithPath("_links").ignored()//validate by links() block
                             )
                             .andWithPrefix("orderLines[].",

@@ -4,6 +4,7 @@ import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.restbucks.tdd.domain.ordering.Order;
 import org.restbucks.tdd.web.rest.OrderRestController;
 import org.restbucks.tdd.web.rest.resource.OrderResource;
@@ -18,6 +19,13 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
     public OrderResourceAssembler() {
         super(OrderRestController.class, OrderResource.class);
         this.modelMapper = new ModelMapper();
+        this.modelMapper
+            .addMappings(new PropertyMap<Order, OrderResource>() {
+                @Override
+                protected void configure() {
+                    map().setTotalAmount(source.totalAmount());
+                }
+            });
     }
 
     @Override

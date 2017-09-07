@@ -14,6 +14,8 @@ public class OrderResource extends ResourceSupport {
 
     private String location;
 
+    private int totalAmount;
+
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @Data

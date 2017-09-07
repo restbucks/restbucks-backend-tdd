@@ -21,6 +21,10 @@ dependencies {
 
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    // spock
+    testCompile group: 'org.spockframework', name: 'spock-core'
+    testCompile('com.athaydes:spock-reports:1.2.12')
+
     // api docs
     asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:${restdocsVersion}"
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:${restdocsVersion}"

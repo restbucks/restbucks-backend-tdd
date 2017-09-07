@@ -1,7 +1,5 @@
 package org.restbucks.tdd.domain.ordering;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +12,7 @@ import lombok.Value;
 @EqualsAndHashCode(of = "id")
 @ToString(of = "id")
 @Getter
-@NoArgsConstructor(access = PRIVATE)
+@NoArgsConstructor
 public class Order {
 
     private Identity id;

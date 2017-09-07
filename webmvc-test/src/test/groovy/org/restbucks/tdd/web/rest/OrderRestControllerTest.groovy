@@ -1,5 +1,6 @@
 package org.restbucks.tdd.web.rest
 
+import com.github.tomakehurst.wiremock.client.WireMock
 import org.junit.Test
 import org.restbucks.tdd.application.PlaceOrderCommandHandler
 import org.restbucks.tdd.command.PlaceOrderCommand
@@ -9,6 +10,7 @@ import org.restbucks.tdd.web.AbstractWebMvcTest
 import org.restbucks.tdd.web.rest.assembler.OrderResourceAssembler
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.cloud.contract.wiremock.restdocs.WireMockRestDocs
 
 import static org.hamcrest.Matchers.is
 import static org.mockito.BDDMockito.given
@@ -101,6 +103,9 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
                                             .description("link to refresh the order")
                             )
                 ))
+                .andDo(WireMockRestDocs.verify()
+						.wiremock(WireMock.post("/rel/orders/placeOrderCommand"))
+						.stub("ordering/place_an_take_away_order"))
         // @formatter:on
     }
 

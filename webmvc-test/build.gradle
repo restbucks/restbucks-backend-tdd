@@ -2,6 +2,7 @@ buildscript {
     ext {
         snippetsDir = file("${projectDir}/build/generated-snippets")
         restdocsVersion = '1.2.1.RELEASE'
+        contractVersion = '1.1.2.RELEASE'
     }
 }
 
@@ -25,6 +26,12 @@ dependencies {
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:${restdocsVersion}"
     // otherwise it raise version compatibility problem with spring boot
     testCompile "org.springframework.restdocs:spring-restdocs-core:${restdocsVersion}"
+    testCompile("org.springframework.cloud:spring-cloud-contract-wiremock:${contractVersion}") {
+        exclude group: 'com.github.tomakehurst'
+    }
+
+    //mock server
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.6.0'
 }
 
 asciidoctor {

@@ -71,3 +71,11 @@ Understand the test hierarchy. +
 2) Is it an overkill to test the `OrderResource.totalAmount` by `@WebMvcTest`  +
 3) Understand test suite
 4) Understand `@SpringBootTest`
+
+.Step 6
+
+Cleanup. +
+
+1) Understand `Test Fixture` +
+2) Try to introduce `OrderFixture` and cleanup `Order` setup in all tests.
+3) Try to eliminate duplicates for API contract verifications.

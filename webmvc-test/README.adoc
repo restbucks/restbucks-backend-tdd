@@ -61,4 +61,13 @@ Understand API stubbing. +
 2) Understand `WireMockRestDocs.verify()` +
 3) Understand `withHeader()`/`withBody()` +
 4) Why stubbing? +
-5) How to publish stubs? + 
+5) How to publish stubs? +
+
+.Step 5
+
+Understand the test hierarchy. +
+
+1) Understand `OrderResource.totalAmount` +
+2) Is it an overkill to test the `OrderResource.totalAmount` by `@WebMvcTest`  +
+3) Understand test suite
+4) Understand `@SpringBootTest`

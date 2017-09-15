@@ -1,0 +1,18 @@
+.URI:
+You should not hard code the URI to find the order by id, you should extract it from hal links.
+
+.Request Sample:
+include::{snippets}/catalog/find_catalogs_by_size/http-request.adoc[]
+
+.Request Params:
+include::{snippets}/catalog/find_catalogs_by_size/request-parameters.adoc[]
+
+.Response Sample:
+include::{snippets}/catalog/find_catalogs_by_size/http-response.adoc[]
+
+.Response Fields:
+include::{snippets}/catalog/find_catalogs_by_size/response-fields.adoc[]
+
+.Hal Links:
+include::{snippets}/catalog/find_catalogs_by_size/links.adoc[]
+

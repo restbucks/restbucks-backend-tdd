@@ -79,3 +79,12 @@ Cleanup. +
 1) Understand `Test Fixture` +
 2) Try to introduce `OrderFixture` and cleanup `Order` setup in all tests.
 3) Try to eliminate duplicates for API contract verifications.
+
+.Step 7
+
+Understand shared contract driven development +
+
+1) Understand contract by example +
+2) Understand WireMock for client +
+3) Understand contract test for server +
+4) Understand syntax of `wiremock-contract-verifier` +

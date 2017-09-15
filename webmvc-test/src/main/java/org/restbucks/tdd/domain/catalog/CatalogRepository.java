@@ -12,4 +12,7 @@ public class CatalogRepository {
         return new ArrayList<>();
     }
 
+    public List<Catalog> findBy(Size size) {
+        return new ArrayList<>();
+    }
 }

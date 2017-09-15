@@ -36,6 +36,7 @@ dependencies {
 
     //mock server
     testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.6.0'
+    testCompile group: 'com.github.hippoom', name: 'wiremock-contract-verifier', version: '0.1.1'
 }
 
 asciidoctor {

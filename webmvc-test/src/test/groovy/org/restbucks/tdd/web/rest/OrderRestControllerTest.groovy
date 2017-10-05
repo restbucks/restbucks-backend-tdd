@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.is
 import static org.mockito.BDDMockito.given
 import static org.restbucks.tdd.domain.ordering.Location.TAKE_AWAY
 import static org.restbucks.tdd.domain.ordering.Order.newOrder
+import static org.restbucks.tdd.domain.ordering.OrderFixture.anOrder
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.*
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
@@ -43,12 +44,7 @@ class OrderRestControllerTest extends AbstractWebMvcTest {
     @Test
     void "it should return an order"() {
 
-        def order = newOrder()
-        order.with(TAKE_AWAY)
-        order.with([
-            new OrderLine("Latte", Size.MEDIUM, 1, 28),
-            new OrderLine("Cappuccino", Size.LARGE, 1, 32)
-        ])
+        def order = anOrder().with(TAKE_AWAY).build()
 
         given(orderRepository.findOne(order.id)).willReturn(order)
 

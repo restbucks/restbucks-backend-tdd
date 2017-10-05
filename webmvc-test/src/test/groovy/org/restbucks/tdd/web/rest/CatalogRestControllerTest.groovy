@@ -9,7 +9,6 @@ import org.restbucks.tdd.web.rest.assembler.CatalogResourceAssembler
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 
-import static org.hamcrest.Matchers.is
 import static org.mockito.BDDMockito.given
 import static org.restbucks.tdd.domain.catalog.CatalogFixture.aCatalog
 import static org.restbucks.tdd.domain.catalog.Size.LARGE
@@ -19,9 +18,6 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import static org.springframework.restdocs.payload.PayloadDocumentation.*
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(controllers = [
     CatalogRestController,
@@ -32,11 +28,12 @@ class CatalogRestControllerTest extends AbstractWebMvcTest {
     @MockBean
     private CatalogRepository catalogRepository
 
+    @Contract("find_catalogs.json")
     @Test
     void "it should return all catalogs"() {
 
         def first = aCatalog().withName("Espresso").withSize(LARGE).build()
-        def second = aCatalog().build()
+        def second = aCatalog().withName("Latte").withSize(LARGE).build()
 
         given(catalogRepository.findAll()).willReturn([
             first,
@@ -44,10 +41,8 @@ class CatalogRestControllerTest extends AbstractWebMvcTest {
         ])
 
         // @formatter:off
-        this.mockMvc.perform(get("/rel/catalogs"))
-	            .andExpect(status().isOk())
-                .andExpect(jsonPath("_embedded.catalogs[0].name", is(first.name)))
-                .andExpect(jsonPath("_embedded.catalogs[0].size", is(first.size.name())))
+        this.mockMvc.perform(contractVerifier.requestPattern())
+	            .andExpect(contractVerifier.responseDefinition())
         // @formatter:on
     }
 

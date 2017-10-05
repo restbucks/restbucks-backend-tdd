@@ -1,0 +1,28 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/rel/catalogs"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "_embedded": {
+                "catalogs": [
+                    {
+                        "name": "Espresso",
+                        "size": "LARGE"
+                    },
+                    {
+                        "name": "Latte",
+                        "size": "LARGE"
+                    }
+                ]
+            },
+            "_links": {
+                "self": {
+                    "href": "http://localhost:8080/rel/catalogs"
+                }
+            }
+        }
+    }
+}

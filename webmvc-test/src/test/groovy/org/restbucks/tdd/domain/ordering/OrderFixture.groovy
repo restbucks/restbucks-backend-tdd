@@ -21,6 +21,11 @@ class OrderFixture {
         this
     }
 
+    def isPaid() {
+        target.status = Order.Status.PAID
+        this
+    }
+
     static OrderFixture anOrder() {
         new OrderFixture()
     }
@@ -28,4 +33,6 @@ class OrderFixture {
     def build() {
         target
     }
+
+
 }

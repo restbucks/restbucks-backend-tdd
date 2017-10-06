@@ -1,5 +1,9 @@
 package org.restbucks.tdd.domain.ordering;
 
+import static lombok.AccessLevel.PRIVATE;
+import static org.restbucks.tdd.domain.ordering.Location.TAKE_AWAY;
+import static org.restbucks.tdd.domain.ordering.Order.Status.PAYMENT_EXPECTED;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +11,16 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.Value;
 
 @Entity
 @Table(name = "orders")
@@ -27,11 +33,12 @@ public class Order {
     @Id
     private Identity id;
 
+    //    @Enumerated(EnumType.STRING)
     @Transient
-    private Location location;
+    private Location location = TAKE_AWAY;
 
-    @Transient
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status = PAYMENT_EXPECTED;
 
     @Transient
     private List<OrderLine> orderLines = new ArrayList<>();
@@ -57,8 +64,12 @@ public class Order {
         return orderLines.stream().mapToInt(OrderLine::subtotalAmount).sum();
     }
 
+    @Getter
+    @ToString
+    @EqualsAndHashCode
+    @AllArgsConstructor
+    @NoArgsConstructor(access = PRIVATE)
     @Embeddable
-    @Value
     public static class Identity implements Serializable {
 
         @Column(name = "id")

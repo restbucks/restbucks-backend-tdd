@@ -57,6 +57,7 @@ subprojects {
     idea {
         module {
             scopes.COMPILE.plus += [configurations.compileOnly]
+            sourceDirs += file('src/querydsl/java')
         }
     }
 

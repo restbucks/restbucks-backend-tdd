@@ -2,3 +2,22 @@ spring:
   application:
     name: "restbucks-backend-tdd"
 
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: TRACE
+      springframework:
+        orm:
+          jpa:
+            JpaTransactionManager: DEBUG
+
+liquibase:
+  change-log: classpath:liquibase/db.changelog.xml
+
+

@@ -1,0 +1,4 @@
+CREATE DATABASE dev_restbucks_tdd;
+CREATE USER 'restbucks'@'%' IDENTIFIED BY '123456';
+GRANT CREATE, ALTER, DROP, DELETE, INSERT, SELECT, UPDATE, INDEX ON dev_restbucks_tdd.* TO 'restbucks'@'%';
+FLUSH PRIVILEGES;

@@ -8,9 +8,26 @@ buildscript {
 
 plugins {
     id 'org.springframework.boot' version "1.5.6.RELEASE"
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.8"
 }
 
 apply plugin: 'org.asciidoctor.convert'
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+querydsl {
+    jpa = true
+}
+
+project.afterEvaluate {
+
+    // it reports querydsl compile erro otherwise
+    project.tasks.compileQuerydslJava.enabled = false
+}
+
+
 
 dependencies {
 
@@ -19,6 +36,14 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile group: 'org.modelmapper', name: 'modelmapper'
 
+
+    //persistence
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+    compile "com.querydsl:querydsl-jpa:4.1.4"
+    compile "mysql:mysql-connector-java:5.1.38"
+    testCompile 'com.h2database:h2:1.4.196'
+    testCompile 'de.danielbechler:java-object-diff:0.95-RC5'
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     // spock

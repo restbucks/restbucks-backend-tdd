@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:dcsp;MODE=MYSQL;INIT=CREATE SCHEMA IF NOT EXISTS \"public\"
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    format-sql: true
